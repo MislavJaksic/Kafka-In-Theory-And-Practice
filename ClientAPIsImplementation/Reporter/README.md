@@ -1,4 +1,10 @@
-## Reporter constructs
+## Reporter
+
+A hidden construct mentioned only twice in Kafka's documentation.  
+
+Mentions:  
+*
+*
 
 ### Metric Reporter
 
