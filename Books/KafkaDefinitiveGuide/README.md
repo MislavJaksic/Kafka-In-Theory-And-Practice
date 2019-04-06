@@ -1,17 +1,17 @@
-## Kafka Definitive Guide
+## [Kafka Definitive Guide](https://book.huihoo.com/pdf/confluent-kafka-definitive-guide-complete.pdf)
 
-Kafka Definitive Guide in a book written by Narkhede, Shapira and Palino.
+Kafka Definitive Guide is written by Narkhede, Shapira and Palino.  
 
 ### Meet Kafka
 
-A system of transferring data between applications.
+A system of transferring data between applications.  
 
 Publish/subscribe messaging system, a distributed streaming tool.  
 Message is a unit of data (a row or record in a database).  
 Messages can have keys. Keys control message partitioning.  
 Batch is a collection of messages.  
 
-Schema is a structure to which all messages have to adhere. Apache Avro, JSON, XML or other.
+Schema is a structure to which all messages have to adhere. Apache Avro, JSON, XML or other.  
 
 Topics are categories (database tables or folders). Topics are broken down into partitions.  
 Partitions are commit logs, ordered, append-only data structures.  
@@ -27,7 +27,7 @@ Partitions are owned by a single broker, called a leader of a partition. It prov
 Retention is how long data is going to be kept in a topic or how big the topic can get or what key it has
 according to log compaction.  
 
-Multiple clusters are required for large scale projects.
+Multiple clusters are required for large scale projects.  
 
 Why use Kafka?  
 Multiple producers.  

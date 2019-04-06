@@ -1,6 +1,6 @@
 ## [Kafka Streams](http://kafka.apache.org/documentation/streams/)
 
-Kafka Stream client library where inputs/outputs are stored in Kafka clusters.  
+Kafka Stream is a program which takes and stores data into the Kafka clusters.  
 
 Very powerful and versatile.  
 

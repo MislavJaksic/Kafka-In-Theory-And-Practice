@@ -1,63 +1,81 @@
+<p align="center">
+  <img width="800" src="images/kafka.png" alt="Kafka icon"></a>
+</p>
+
 ## [Kafka](https://kafka.apache.org/)
 
-Kafka is a distributed streaming platform. It brokers data between programs using a publish-subscribe mechanism. 
+Kafka is a distributed streaming platform. It brokers data between processes using a publish-subscribe
+mechanism.  
 
 ### Nomenclature
 
-Cluster -> a group of Kafka nodes/instances/servers lead by a Zookeeper instance  
-Broker -> a Kafka deamon in charge of a node  
-Node -> a "database" for topic partitions  
-Topic -> a category/feed to which records are published  
+```
+Cluster   -> a group of Kafka nodes/instances/servers lead by a Zookeeper instance  
+Broker    -> a Kafka deamon in charge of a node  
+Node      -> a "database" for topic partitions  
+Topic     -> a category/feed to which records are published  
+Record    -> a message; has a key, a value and a timestamp  
 Partition -> a partitioned log owned by a topic  
-Replica -> a copy of the cluster leader node  
-Consumer -> an application, a program which reads data to a topic  
-Producer -> an application, a program which publishes data to a topic  
-Stream -> an application, a program which reads data, transforms data and publishes the same to another topic  
+Replica   -> a copy of the cluster leader node  
+Consumer  -> a program, a program which reads data to a topic  
+Producer  -> a program, a program which publishes data to a topic  
+Connect   -> a program, 
+Stream    -> a program, a program which reads data, transforms data and publishes the same to another topic  
+```
 
 ### [Introduction](http://kafka.apache.org/intro)
 
-Kafka is run as a cluster; stores streams of "records" in categories called "topics".
+Kafka is run as a Zookeeper cluster of Kafka brokers.  
+Brokers store streams of messages in categories called topics.  
 
-Producer: publish records to topics.  
-Consumer: subscribe to topics and process streams of records.  
-Streams: application as a stream processor; take the input stream from a topic and transform it into an output stream which outputs to a topic.  
-Connector: connect topics to existing systems.  
+Topics are categories/feeds to which messages are published. It is implemented as a partitioned log.  
+Topic partitions are ordered and immutable sequence of messages.  
+Partitions are scattered over many brokers.  
+Each message is assigned an offset within the partition.  
 
-Topic: category/feed to which records are published; has a partitioned log.  
-Each partition in a log is ordered and immutable sequence of records. Partitions may be scattered over many nodes. Each record has an offset. The Kafka cluster controls when to delete the records using a retention policy.  
+Kafka broker cluster deletes messages according to a retention policy.  
+
+Kafka client programs:  
+```
+Producer    -> publishes messages to topics
+Consumer    -> subscribes to topics and processes messages
+Streams     -> stream processor program; consumes messages from topics and produces output messages
+Connector   -> an adapter between Kafka topics to outside systems
+AdminClient -> Kafka topics and security administrative API
+```
 
 ### [Quickstart](http://kafka.apache.org/quickstart)
 
 #### Step 1
 
-Java needs to be installed and configured.
+Install and configure Java.  
 
-First, download and install Kafka using a binary.
+Then, download and install Kafka using a binary:  
 ```
 $: tar -xzf kafka_x.x-x.x.x.tgz
 ```
 
 #### Step 2
 
-To start Kafka, first start Zookeeper:  
+Start Zookeeper and Kafka:  
 ```
-$: bin/zookeeper-server-start.sh config/zookeeper.properties -> start Zookeeper
-$: bin/kafka-server-start.sh config/server.properties -> start Kafka
+$: bin/zookeeper-server-start.sh config/zookeeper.properties
+$: bin/kafka-server-start.sh config/server.properties
 ```
 
 #### Step 3
 
-Topics are constructs that abstract data in Kafka.  
+Try a few topic scripts:  
 ```
 $: bin/kafka-topics.sh --list --zookeeper localhost:2181 -> list topics
 [script_name] [command] [invoke_zookeeper] [host:port_of_broker]
-$: bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test_topic -> create topic
+$: bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test-topic -> create topic
 [script_name] [command] [invoke_zookeeper] [host:port_of_broker] [replication] [partitioning] [topic_name]
 ```
 
 #### Step 4
 
-Producers are constructs that send data to a Kafka topic.
+Create a simple producer:  
 ```
 $: bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test_topic -> command line producer
 [script_name] [command] TODO
@@ -65,7 +83,7 @@ $: bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test_topic
 
 #### Step 5
 
-Consumers are constructs that read data from a Kafka topic.
+Create a simple consumer:  
 ```
 $: bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test_topic --from-beginning -> command line consumer
 [script_name] [command] [bootstrap_server_to_connect] [topic_name] [begin_reading_from/offset]
@@ -73,61 +91,19 @@ $: bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test_
 
 #### Step 6
 
-Kafka cluster can be made of only one node.  
-To create a multi broker/node cluster start multiple Kafka instances.  
+Zookeeper cluster is made up of at least one Kafka broker.  
+To create a multi broker cluster just start multiple Kafka processes.  
 
-All Kafka instances must have different broker IDs and ports:  
-```
-$: cp config/server.properties config/server-1.properties
-$: nano config/server-1.properties -> change "broker.id", "listeners", "log.dirs"
-
-$: cp config/server.properties config/server-2.properties
-$: nano config/server-2.properties -> change "broker.id", "listeners", "log.dirs"
-```
-
-Run Zookeeper and three Kafka brokers/nodes:  
-```
-$: bin/zookeeper-server-start.sh config/zookeeper.properties &
-$: bin/kafka-server-start.sh config/server.properties &
-$: bin/kafka-server-start.sh config/server-1.properties &
-$: bin/kafka-server-start.sh config/server-2.properties &
-
-$: ps -> PIDs
-$: kill PID -> close program
-```
-
-Create a topic in a cluster:
-```
-$: bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic replicated_test -> create replicated topic
-$: bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic partitioned_test -> create partitioned topic
-```
-
-Inspect the topics:  
-```
-$: bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic replicated_test
-  -> Topic:my-replicated-topic   PartitionCount:1    ReplicationFactor:3 Configs:
-      -> Topic: replicated_test  Partition: 0    Leader: _leader_number   Replicas: 1,2,0 Isr: 1,2,0
-
-$: bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic partitioned_test
-  -> -
-    -> -
-```
-
-You can try and kill the leader and then inspect the topics again to see what happened.  
-```
-$: ps -> PIDs
-$: ps aux | grep server-_leader_number.properties -> find the _leader_number by inspecting the topic  
-$: kill PID -> close program
-```
+All Kafka brokers must have different "broker.id", "listeners" and "log.dirs" values.  
 
 #### Step 7
 
-Use Kafka Connect instead of custome integration code.  
-Kafka Connect is a construct that imports and exports data to and from Kafka.  
+Use Kafka Connect instead of custom integration code.  
+Kafka Connect imports and exports data to and from Kafka topics.  
 
 Start Connect in standalone mode, a local dedicated process:  
 ```
-$: bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties -> file reader/writer Connector pair  
+$: bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties -> file reader and writer Connector pair  
 [script_name] [connect_config] [connector_one_config] [connector_two_config]
 ```
 Configuration files define the Connector's behaviour.  
@@ -138,35 +114,4 @@ The Connectors will continuously process data as you append data to the file.
 #### Step 8
 
 Kafka Streams is a client library for building real time projects.  
-It combines Java/Scala client side deployment and Kafka's server side cluster technology.  
-
-### [Kafka in Production](http://kafka.apache.org/documentation/#operations) 
-
-#### [Kafka Operations](http://kafka.apache.org/documentation/#basic_ops)
-
-Adding, removing, modifying topics.  
-Graceful shutdown.  
-Balancing leadership.  
-Balancing replicas.  
-Data mirroring between clusters.  
-Checking consumer positions.  
-Managing consumer groups.  
-Cluster expansion.  
-Automatic data migration.  
-Decommissioning brokers.  
-Increasing replicas factor.  
-Setting quotas.  
-
-TODO  
-
-#### [Datacenters](http://kafka.apache.org/documentation/#datacenters)
-
-Questions regarding multiple datacenters.  
-
-TODO  
-
-#### [Kafka Configuration](http://kafka.apache.org/documentation/#config)
-
-Kafka has a lot of different [configuration settings](http://kafka.apache.org/documentation/#configuration).  
-
-See a sample production server configuration.  
+Streams combines Java/Scala client side deployment and Kafka's server side cluster technology.  

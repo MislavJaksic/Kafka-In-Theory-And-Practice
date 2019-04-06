@@ -1,24 +1,16 @@
-## Reporters
+## Reporter constructs
 
-### Metrics Reporter
+### Metric Reporter
 
-For Broker, Consumer, Producer, Stream, Connect and AdminClient.  
+A program for reporting broker, consumer, producer, stream, connect or AdminClient metrics.  
 
-Configuration description:  
+Kafka server configuration properties:  
 ```
-metric.reporters
-
-Class to use as metrics reporter.
-Implements org.apache.kafka.common.metrics.MetricsReporter.
-Classes is notified of new metric creation.
+metric.reporters=package.to.Class
 ```
-
-Jar should be placed in:  
-```
-kafka_x.y.z/libs/*.jar
-```
-
-If an error occures, this might be cause by a dependency conflict. Don't use an UBER jar.  
+Metrics reporter class.  
+The class implements org.apache.kafka.common.metrics.MetricsReporter.  
+The class is notified about new metrics.  
 
 Order of execution:  
 1) configure()  
@@ -29,17 +21,23 @@ Order of execution:
 
 ### Kafka Metrics Reporter
 
-For Broker.  
+A program for reporting broker Yammer/Dropwizard metrics.  
 
-Configuration description:  
+Kafka server configuration properties:  
 ```
-kafka.metrics.reporters
-
-Class to use as Yammer metrics reporter.
-Implement kafka.metrics.KafkaMetricsReporter.
-To expose JMX operations construct an MBean class.
-MBean class implements kafka.metrics.KafkaMetricsReporterMBean.
+kafka.metrics.reporters=path.to.Class
 ```
+Yammer metrics reporter class.  
+The class implements kafka.metrics.KafkaMetricsReporter.  
+JMX operations are exposed using an MBean class kafka.metrics.KafkaMetricsReporterMBean.  
 
 Order of execution:  
 1) init()  
+
+### JAR location
+
+Reporter JARs are placed in "kafka_x.y.z/libs/*.jar".  
+
+### Errors
+
+If a strange error occures, it might be due to a dependency conflict. Don't use an UBER jar.  
