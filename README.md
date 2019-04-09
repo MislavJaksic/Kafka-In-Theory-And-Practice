@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" src="images/kafka.png" alt="Kafka icon"></a>
+  <img width="200" src="images/kafka.png" alt="Kafka icon"></a>
 </p>
 
 ## [Kafka](https://kafka.apache.org/)

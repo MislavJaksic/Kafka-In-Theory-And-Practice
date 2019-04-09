@@ -2,21 +2,47 @@
 
 A hidden construct mentioned only twice in Kafka's documentation.  
 
-Mentions:  
-*
-*
+Reporters are mentioned in:  
+* kafka.metrics.reporters property
+* metric.reporters property
+
+Reporters are JARs which are run just after you run Kafka.  
+
+There are two different types of Reporters:
+```
+Kafka Metrics Reporters -> reports Yammer/Dropwizard metrics
+Metric Reporters        -> reports "client" metrics
+```
+
+
+
+### Kafka Metrics Reporter
+
+For reporting Broker Yammer/Dropwizard metrics.  
+
+Append the following to Kafka server.properties:  
+```
+kafka.metrics.reporters=path.to.Class
+```
+ 
+The class must implement kafka.metrics.KafkaMetricsReporter.  
+
+Order of execution:  
+1) init() 
+
+
 
 ### Metric Reporter
 
-A program for reporting broker, consumer, producer, stream, connect or AdminClient metrics.  
+A program for reporting Broker, Consumer, Producer, Stream, Connect or AdminClient metrics.  
 
-Kafka server configuration properties:  
+Append the following to Kafka server.properties:  
 ```
 metric.reporters=package.to.Class
 ```
-Metrics reporter class.  
-The class implements org.apache.kafka.common.metrics.MetricsReporter.  
-The class is notified about new metrics.  
+
+The class must implement org.apache.kafka.common.metrics.MetricsReporter.  
+It is notified about new metrics.  
 
 Order of execution:  
 1) configure()  
@@ -25,25 +51,12 @@ Order of execution:
 4) metricRemoval()  
 5) close()  
 
-### Kafka Metrics Reporter
 
-A program for reporting broker Yammer/Dropwizard metrics.  
-
-Kafka server configuration properties:  
-```
-kafka.metrics.reporters=path.to.Class
-```
-Yammer metrics reporter class.  
-The class implements kafka.metrics.KafkaMetricsReporter.  
-JMX operations are exposed using an MBean class kafka.metrics.KafkaMetricsReporterMBean.  
-
-Order of execution:  
-1) init()  
 
 ### JAR location
 
-Reporter JARs are placed in "kafka_x.y.z/libs/*.jar".  
+Both types of Reporter JARs are placed in /.../kafka_x.y.z/libs.  
 
 ### Errors
 
-If a strange error occures, it might be due to a dependency conflict. Don't use an UBER jar.  
+If a strange Scala error occurs, it might be cause by a dependency conflict. Use a selective UBER jar.  

@@ -7,7 +7,7 @@ Start Zookeeper:
 $: sudo bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
-Start Kafka:  
+Start Kafka and open its metrics port:  
 ```
 $: sudo [JMX_PORT=PORT] bin/kafka-server-start.sh config/server.properties
 ```
@@ -89,5 +89,5 @@ $: bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-
 
 Start sample file Connect:  
 ```
-bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
+$: bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
 ```
