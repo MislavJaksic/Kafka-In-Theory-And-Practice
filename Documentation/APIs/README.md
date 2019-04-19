@@ -1,1 +1,0 @@
-### [2. APIs](https://kafka.apache.org/documentation/#api)
