@@ -1,6 +1,6 @@
 ## [Kafka Streams](http://kafka.apache.org/documentation/streams/)
 
-Kafka Stream is a program which takes and stores data into the Kafka clusters.  
+Kafka Stream is a program which consumes, transforms and publishes data to a topic.  
 
 Very powerful and versatile.  
 

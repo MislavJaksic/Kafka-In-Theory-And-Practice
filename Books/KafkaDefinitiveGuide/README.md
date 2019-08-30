@@ -1,10 +1,10 @@
 ## [Kafka Definitive Guide](https://book.huihoo.com/pdf/confluent-kafka-definitive-guide-complete.pdf)
 
-Kafka Definitive Guide is written by Narkhede, Shapira and Palino.  
+Written by Narkhede, Shapira and Palino.  
 
 ### Meet Kafka
 
-A system of transferring data between applications.  
+A system for transferring data between applications.  
 
 Publish/subscribe messaging system, a distributed streaming tool.  
 Message is a unit of data (a row or record in a database).  

@@ -7,20 +7,12 @@ Start Zookeeper:
 $: sudo bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
-Start Kafka and open its metrics port:  
+Start Kafka and open a JMX port:  
 ```
 $: sudo [JMX_PORT=PORT] bin/kafka-server-start.sh config/server.properties
 ```
 
-Start different Kafkas:
-```
-server-X.properties -> "broker.id", "listeners" and "log.dirs" must be unique
-$: sudo bin/kafka-server-start.sh config/server.properties &
-$: sudo bin/kafka-server-start.sh config/server-1.properties &
-$: sudo bin/kafka-server-start.sh config/server-2.properties &
-```
-
-Start Zookeeper and different Kafkas in seperate terminals:
+Start Zookeeper and multiple Kafkas in seperate terminals:
 ```
 #!/bin/bash
 
@@ -30,24 +22,8 @@ sudo gnome-terminal -e "bash -c '$path/bin/zookeeper-server-start.sh $path/confi
 sudo gnome-terminal -e "bash -c 'sleep 5; JMX_PORT=55555 $path/bin/kafka-server-start.sh $path/config/server.properties'"
 sudo gnome-terminal -e "bash -c 'sleep 5; JMX_PORT=55556 $path/bin/kafka-server-start.sh $path/config/server-1.properties'"
 sudo gnome-terminal -e "bash -c 'sleep 5; JMX_PORT=55557 $path/bin/kafka-server-start.sh $path/config/server-2.properties'"
-```
 
-Start Zookeeper and Kafka in the same terminal:  
-```
-#!/bin/bash
-
-path="/path/to/kafka"
-
-sudo $path/bin/zookeeper-server-start.sh $path/config/zookeeper.properties
-AND
-sudo JMX_PORT=55555 $path/bin/kafka-server-start.sh $path/config/server.properties
-```
-
-Stop Kafkas:
-```
-$: ps
-
-$: kill PID
+# Note: server-X.properties -> "broker.id", "listeners" and "log.dirs" must be unique
 ```
 
 ### Topic
@@ -61,7 +37,7 @@ $: bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 
 $: bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic partitioned-test
 ```
 
-List topics in cluster:  
+List topics:  
 ```
 $: bin/kafka-topics.sh --list --zookeeper localhost:2181
 ```
@@ -87,7 +63,7 @@ $: bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-
 
 ### Connect
 
-Start sample file Connect:  
+Start a file Connect:  
 ```
 $: bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
 ```

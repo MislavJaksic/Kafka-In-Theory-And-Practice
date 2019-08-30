@@ -1,6 +1,6 @@
 ### [8. Kafka Connect](http://kafka.apache.org/documentation.html#connect)
 
-Kafka Connect moves data between Kafka topics and another system.  
+Kafka Connect transfers data between Kafka and an external system. 
 
 ### [8.1 Overview](https://kafka.apache.org/documentation/#connect_overview)
 
@@ -24,6 +24,7 @@ In standalone mode the Connector is run in a single process.
 Run a Connector in standalone mode by executing:  
 ```
 $: bin/connect-standalone.sh config/connect-standalone.properties [connector1.properties]..[connectorN.properties]
+
 $: [runner-script] [worker.properties] [connector.properties] ...
 ```
 

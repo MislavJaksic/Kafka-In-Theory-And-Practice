@@ -2,7 +2,7 @@
 
 ### 4.1 Motivation
 
-There should be lots of data producers.  
+There should be a lot of data producers.  
 Data backlog should not effect performance.  
 Data should be partitioned for speed.  
 Data should be replicated for reliability.  
