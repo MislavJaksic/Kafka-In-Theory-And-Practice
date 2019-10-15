@@ -4,7 +4,8 @@
 
 ## [Kafka](https://kafka.apache.org/)
 
-Kafka is a distributed publish-subscribe stream storage and processor.  
+Kafka is a distributed publish-subscribe messaging system.  
+Kafka Streams can process streams of messages (similar to Apache Spark and Flink).  
 
 ### Nomenclature
 
