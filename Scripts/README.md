@@ -4,12 +4,12 @@
 
 Start Zookeeper:  
 ```
-$: sudo bin/zookeeper-server-start.sh config/zookeeper.properties
+$: bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
 Start Kafka and open a JMX port:  
 ```
-$: sudo [JMX_PORT=PORT] bin/kafka-server-start.sh config/server.properties
+$: [JMX_PORT=PORT] bin/kafka-server-start.sh config/server.properties
 ```
 
 Start Zookeeper and multiple Kafkas in seperate terminals:
@@ -18,10 +18,10 @@ Start Zookeeper and multiple Kafkas in seperate terminals:
 
 path="/path/to/kafka"
 
-sudo gnome-terminal -e "bash -c '$path/bin/zookeeper-server-start.sh $path/config/zookeeper.properties'"
-sudo gnome-terminal -e "bash -c 'sleep 5; JMX_PORT=55555 $path/bin/kafka-server-start.sh $path/config/server.properties'"
-sudo gnome-terminal -e "bash -c 'sleep 5; JMX_PORT=55556 $path/bin/kafka-server-start.sh $path/config/server-1.properties'"
-sudo gnome-terminal -e "bash -c 'sleep 5; JMX_PORT=55557 $path/bin/kafka-server-start.sh $path/config/server-2.properties'"
+gnome-terminal -e "bash -c '$path/bin/zookeeper-server-start.sh $path/config/zookeeper.properties'"
+gnome-terminal -e "bash -c 'sleep 5; JMX_PORT=55555 $path/bin/kafka-server-start.sh $path/config/server.properties'"
+gnome-terminal -e "bash -c 'sleep 5; JMX_PORT=55556 $path/bin/kafka-server-start.sh $path/config/server-1.properties'"
+gnome-terminal -e "bash -c 'sleep 5; JMX_PORT=55557 $path/bin/kafka-server-start.sh $path/config/server-2.properties'"
 
 # Note: server-X.properties -> "broker.id", "listeners" and "log.dirs" must be unique
 ```
