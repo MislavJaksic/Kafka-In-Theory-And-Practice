@@ -1,6 +1,6 @@
 ## [Kafka Definitive Guide](https://book.huihoo.com/pdf/confluent-kafka-definitive-guide-complete.pdf)
 
-Written by Narkhede, Shapira and Palino.  
+Kafka Definitive Guide is written by Narkhede, Shapira and Palino.  
 
 ### Meet Kafka
 
