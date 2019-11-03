@@ -9,7 +9,7 @@ Kafka Streams can process streams of messages (it's similar to Apache Spark and 
 
 ### Install
 
-[Instruction](Docs\Quickstart)
+[Instructions](Docs/Quickstart)
 
 ### Nomenclature
 
