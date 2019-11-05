@@ -38,7 +38,7 @@ A processor topology is an abstraction which is translated into parallel process
 
 ### Time
 
-Timestamps are embedded into Kafka messages.  
+Timestamps are embedded into Kafka records.  
 Timestamps either represent event-time or ingestion-time.  
 Depends on the topic and Kafka broker settings.  
 
@@ -93,7 +93,7 @@ State stores store and query data through `Interactive Queries`.
 
 Once and only once record processing can be achieved.  
 
-Producers can send messages to topic partitions in a transactional and idempotent manner.  
+Producers can send records to topic partitions in a transactional and idempotent manner.  
 Set `processing.guarantee` configuration value to `exactly_once` (default is `at_least_once`).  
 
 ### Out-of-Order Handling

@@ -18,7 +18,7 @@ connect-log4j.properties
 
 ### Running
 
-Kafka Source Connect order of exeuction:  
+Kafka Source Connect order of execution:  
 ```
 1)  Connector - version()  
 2)  Connector - config()  

@@ -5,7 +5,7 @@
 ## [Kafka](https://kafka.apache.org/)
 
 Kafka is a distributed publish-subscribe messaging system.  
-Kafka Streams can process streams of messages (it's similar to Apache Spark and Flink).  
+Kafka Streams can process streams of records (it's similar to Apache Spark and Flink).  
 
 ### Install
 
@@ -17,7 +17,7 @@ Kafka Streams can process streams of messages (it's similar to Apache Spark and 
 Cluster   -> a group of Kafka brokers lead by a Zookeeper instance
 Broker    -> a Kafka daemon/node/instance/server
 Topic     -> a category/feed to which records are published
-Record    -> a message; has a key, a value and a timestamp
+Record    -> has a key, a value/message and a timestamp
 Partition -> a partitioned log; many make up a topic; each has a broker leader
 Replica   -> a copy of a partition; brokers who own them are followers
 

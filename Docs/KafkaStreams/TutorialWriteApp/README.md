@@ -2,7 +2,7 @@
 
 ### Setup
 
-Note: don't follow their advice; it doesn't work
+Note: don't follow the source tutorial. It doesn't work.
 
 Copy the sample project from this directory.  
 
@@ -11,7 +11,7 @@ Copy the sample project from this directory.
 ```
 `StreamsConfig`: configuration values
 `StreamsBuilder`: builds a computational logic topology
-`KafkaStreams`: generates records/messages from the input Kafka topic
+`KafkaStreams`: generates records from the input Kafka topic
 `Topology`: computational logic
 ```
 
@@ -20,7 +20,7 @@ You can run the sample project using the script in the same project.
 ### Line Split
 
 ```
-`.flatMapValues`:
+`.flatMapValues`: modifies values of newly created records based on the the original record
 ```
 
 ### Wordcount
@@ -30,7 +30,7 @@ Changelog streams require output topics with log compaction.
 ```
 `.groupBy`: generates a grouped stream keyed on a value
 `.count`: counts events
-`toStream`:
+`.toStream`: transform a KTable to a KStream
 `Materialized`: store data in a state store that can be queried
 ```
 

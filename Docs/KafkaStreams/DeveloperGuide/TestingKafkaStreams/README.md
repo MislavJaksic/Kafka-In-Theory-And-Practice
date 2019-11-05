@@ -15,11 +15,11 @@
 ### Testing a Streams application
 
 ```
-`TopologyTestDriver` pipes records through a `Topology`
-`StreamsBuilder` helps build a `Topology`
-`ConsumerRecordFactory` helps create key-value records
-`ProducerRecord` helps read results
-`OutputVerifier` verifies results
+`TopologyTestDriver`: pipes records through a `Topology`
+`StreamsBuilder`: helps build a `Topology`
+`ConsumerRecordFactory`: helps create key-value records
+`ProducerRecord`: helps read results
+`OutputVerifier`: verifies results
 ```
 
 `TopologyTestDriver` supports event-time and wall-clock-time punctuations.  

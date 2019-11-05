@@ -1,6 +1,6 @@
 ### [8. Kafka Connect](http://kafka.apache.org/documentation.html#connect)
 
-Kafka Connect transfers data between Kafka and an external system. 
+Kafka Connect transfers data between Kafka and an external system.
 
 ### [8.1 Overview](https://kafka.apache.org/documentation/#connect_overview)
 
@@ -32,8 +32,8 @@ Important worker properties:
 ```
 bootstrap.servers=localhost:9092 -> Kafka brokers
 
-key.converter=JsonConverter      -> transforms message keys from the Connect format and to a serialized Kafka format
-value.converter=JsonConverter    -> transforms message values from the Connect format and to a serialized Kafka format
+key.converter=JsonConverter      -> transforms record keys from the Connect format and to a serialized Kafka format
+value.converter=JsonConverter    -> transforms record values from the Connect format and to a serialized Kafka format
 
 key.converter.schemas.enable=true
 value.converter.schemas.enable=true
@@ -47,7 +47,7 @@ Connector properties for standalone mode:
 ```
 name=jmx-connector           -> Connector name
 connector.class=JMXConnector -> Connector's location within a package (.jar, ...)
-tasks.max=1                  -> requested number of workers/tasks under a Connector 
+tasks.max=1                  -> requested number of workers/tasks under a Connector
 
 offset.storage.file.filename=/tmp/connect.offsets -> optional; file in which offset is stored  
 
@@ -102,7 +102,7 @@ REST API server is configured using:
 Kafka Connector cross cluster communication configuration:
 * rest.advertised.host.name
 * rest.advertised.port
-* rest.advertised.listener 
+* rest.advertised.listener
 
 REST API endpoints can be seen [here](https://kafka.apache.org/documentation/#connect_rest).
 
@@ -116,7 +116,7 @@ Connectors are just responsible for breaking up a job into multiple Tasks.
 
 Task types:
 * source
-* sink 
+* sink
 
 Tasks handle input/output streams of records with a schema.  
 
