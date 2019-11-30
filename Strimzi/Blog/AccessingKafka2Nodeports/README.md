@@ -36,6 +36,8 @@ To make brokers visible outside Kubernetes Strimzi creates `N+1` `NodePort` `Ser
 * N are used to address each broker directly
 
 ```
+# Note: Kafka cluster name is `my-cluster`
+
           Per Pod Services:         
        |-->  k1-service ---------------> kafka-broker-1
 Client --->  k2-service ---------------> kafka-broker-2
@@ -119,7 +121,7 @@ After Strimzi configures everything:
 * test if you can connect to the Kafka cluster
 
 ```
-$: kubectl get service Kafka-Cluster-kafka-external-bootstrap -o=jsonpath='{.spec.ports[0].nodePort}{"\n"}' -n K8s-Namespace  # -> Node-Port
+$: kubectl get service Kafka-Cluster-kafka-external-bootstrap -o=jsonpath='{.spec.ports[0].nodePort}{"\n"}'  # -> Node-Port
 
 $: kubectl get nodes  # ->
   # NAME       STATUS   ROLES   AGE   VERSION
@@ -170,7 +172,7 @@ $: kubectl get node Node-Name -o=jsonpath='{range .status.addresses[*]}{.type}{"
 
 ```
 # Note: the External-Address
-$: kubectl exec Kafka-Cluster-kafka-0  -n K8s-Namespace -c kafka -it -- cat /tmp/strimzi.properties | grep advertised  # ->
+$: kubectl exec Kafka-Cluster-kafka-0 -c kafka -it -- cat /tmp/strimzi.properties | grep advertised  # ->
   # advertised.listeners=
   # REPLICATION://...,
   # CLIENT://...,

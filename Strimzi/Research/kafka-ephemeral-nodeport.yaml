@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta1
 kind: Kafka
 metadata:
-  name: kafka-cluster  # changed
+  name: kafka-cluster-0  # changed
 spec:
   kafka:
     version: 2.3.0
@@ -13,7 +13,7 @@ spec:
         type: nodeport
         tls: false
         overrides:
-          brokers:
+          brokers:  # set advertised.listener in Kafka
           - broker: 0
             advertisedHost: Kubectl-Server-Ip
           - broker: 1
@@ -31,6 +31,6 @@ spec:
     replicas: 3
     storage:
       type: ephemeral
-  entityOperator:
+  entityOperator:  # configure Operators for this cluster
     topicOperator: {}
     userOperator: {}

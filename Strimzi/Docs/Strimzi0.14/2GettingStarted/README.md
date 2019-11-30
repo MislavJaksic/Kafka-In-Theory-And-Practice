@@ -92,15 +92,16 @@ Prerequisites:
 
 ```
 # Note: `K8s-Namespace` could be `kafka-ns`, `strimzi-ns`, ...
+
 $: kubectl create namespace K8s-Namespace
 
 $: sed -i 's/namespace: .*/namespace: K8s-Namespace/' install/cluster-operator/*RoleBinding*.yaml
 
-$: kubectl apply -f install/cluster-operator -n K8s-Namespace
+$: kubectl apply -f install/cluster-operator
 ```
 
 ```
-$: kubectl delete deployment.apps/strimzi-cluster-operator -n K8s-Namespace
+$: kubectl delete -f install/cluster-operator
 ```
 
 TODO 2.3.4., 2.3.5.
@@ -157,13 +158,13 @@ See `Kafka` [configuration options](../DeploymentConfig) for how you can deploy 
 
 ```
 # Note: rename `my-cluster` in the templates
-$: kubectl apply -f examples/kafka/kafka-ephemeral.yaml -n K8s-Namespace
-OR
-$: kubectl apply -f examples/kafka/kafka-persistent.yaml -n K8s-Namespace
-```
+# Note: configure `.spec.entityOperator`
 
-```
-$: kubectl delete kafka.kafka.strimzi.io/Kafka-Cluster -n K8s-Namespace
+$: kubectl apply -f examples/kafka/kafka-ephemeral.yaml
+OR
+$: kubectl apply -f examples/kafka/kafka-persistent.yaml
+
+$: kubectl delete -f examples/kafka/kafka-XYZ.yaml
 ```
 
 ### Kafka Connect
@@ -187,16 +188,42 @@ Prerequisites:
 # Note: `Kafka-Cluster` is `my-cluster` by default
 # Note: `Topic-Name` can be any name
 
-$: kubectl run kafka-producer -ti --image=strimzi/kafka:latest-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list Kafka-Cluster-kafka-bootstrap:9092 --topic Topic-Name -n K8s-Namespace
+$: kubectl run kafka-producer -ti --image=strimzi/kafka:latest-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list Kafka-Cluster-kafka-bootstrap:9092 --topic Topic-Name
 
-$: kubectl run kafka-consumer -ti --image=strimzi/kafka:latest-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server Kafka-Cluster-kafka-bootstrap:9092 --topic Topic-Name --from-beginning -n K8s-Namespace
+$: kubectl run kafka-consumer -ti --image=strimzi/kafka:latest-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server Kafka-Cluster-kafka-bootstrap:9092 --topic Topic-Name --from-beginning
 ```
 
 See [`NodePort` instructions](../../../Blog/AccessingKafka2Nodeports) for how clients external to the host machine can access Kafka.  
 
 ### Topic Operator
 
-TODO
+Manages Kafka topics:
+* create
+* delete
+* update
+
+You can declare a `KafkaTopic` as part of your deployment.  
+
+You can deploy the `Topic Operator` in [standalone mode](https://strimzi.io/docs/latest/#deploying-the-topic-operator-standalone-deploying).  
+
+Prerequisites:
+* `Cluster Operator` is deployed
+* `Kafka` resource exists
+* `.spec.entityOperator` object exists in `Kafka`
+
+```
+apiVersion: kafka.strimzi.io/v1beta1
+kind: Kafka
+metadata:
+  name: Kafka-Cluster
+spec:
+  ...
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+```
+
+Deploy the Kafka cluster and with it, the `Topic Operator`.  
 
 ### User Operator
 

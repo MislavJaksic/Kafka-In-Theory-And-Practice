@@ -18,15 +18,23 @@ $: helm list -n K8s-Namespace
 $: helm uninstall Release-Name -n K8s-Namespace
 ```
 
-#### Deploy (ephemeral) Kafka
+#### Deploy Kafka
 
 ```
-# Note: `Kafka-Cluster` is `my-cluster` by default in `*.yaml`
+# Note: rename `my-cluster` in the templates
+# Note: configure `.spec.entityOperator`
 
-$: kubectl apply -f Research/kafka-ephemeral.yaml -n K8s-Namespace
-$: kubectl apply -f examples/kafka/kafka-persistent.yaml -n K8s-Namespace
+$: kubectl apply -f examples/kafka/kafka-ephemeral.yaml
 
-$: kubectl delete kafka.kafka.strimzi.io/Kafka-Cluster -n K8s-Namespace
+$: kubectl delete -f examples/kafka/kafka-XYZ.yaml
+```
+
+#### Deploy KafkaTopic
+
+Manage them with your client's `Deployment`.  
+
+```
+$: kubectl apply -f examples/topic/kafka-topic.yaml
 ```
 
 ### Connect to Strimzi
