@@ -210,7 +210,21 @@ In Amazon AWS you need to enable access to the `Node`s / `NodePort`s in the secu
 
 ### TLS support
 
-TODO
+TLS over `NodePort` doesn’t support TLS hostname verification.  
+
+```
+$: kubectl get secret Kafka-Cluster-cluster-ca-cert -o jsonpath='{.data.ca\.crt}' | base64 -d > strimzi-ca.crt
+
+$: keytool -import -trustcacerts -alias root -file strimzi-ca.crt -keystore truststore.jks -storepass password -noprompt
+```
+
+```
+$: kafka-console-producer.sh --broker-list IP:PORT --producer-property security.protocol=SSL --producer-property ssl.truststore.password=password --producer-property ssl.truststore.location=./truststore.jks --topic test-topic
+```
+
+```
+$: kafka-console-consumer.sh --bootstrap-server IP:PORT --producer-property security.protocol=SSL --producer-property ssl.truststore.password=password --producer-property ssl.truststore.location=./truststore.jks --topic test-topic [--from-beginning]
+```
 
 ### Customizations
 

@@ -4,8 +4,6 @@
 
 ### Deploy Strimzi
 
-[Instructions](Docs/Strimzi0.14/GettingStarted)
-
 #### Cluster Operator
 
 ```
@@ -37,6 +35,14 @@ Manage them with your client's `Deployment`.
 $: kubectl apply -f examples/topic/kafka-topic.yaml
 ```
 
+#### Deploy KafkaUser
+
+Manage them with your client's `Deployment`.  
+
+```
+$: kubectl apply -f examples/topic/kafka-user.yaml
+```
+
 ### Connect to Strimzi
 
 #### NodePort
@@ -45,5 +51,7 @@ $: kubectl apply -f examples/topic/kafka-topic.yaml
 $: bin/kafka-console-producer.sh --broker-list Kubectl-Server-IP:Node-Port --topic Topic-Name
 $: bin/kafka-console-consumer.sh --bootstrap-server Kubectl-Server-IP:Node-Port --topic Topic-Name --from-beginning
 ```
+
+You can also enable TLS.  
 
 [Instructions](Blog/AccessingKafka2Nodeports)

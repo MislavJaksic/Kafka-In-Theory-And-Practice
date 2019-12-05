@@ -1,8 +1,8 @@
 ## [Getting started with Strimzi](https://strimzi.io/docs/latest/#getting-started-str)
 
-Strimzi benefits from OpenShift (Kubernetes distribution) integration.  
+Strimzi benefits from integration with OpenShift (Kubernetes distribution).  
 
-Guide assumes `kubectl` can reach Kubernetes.  
+<The guide assumes `kubectl` can reach Kubernetes.  
 
 [Strimzi release artefacts](https://github.com/strimzi/strimzi-kafka-operator/releases), YAML files, are referenced throughout the docs.  
 `Cluster Operator` can be deployed using a Helm chart.  
@@ -227,7 +227,33 @@ Deploy the Kafka cluster and with it, the `Topic Operator`.
 
 ### User Operator
 
-TODO
+Manages Kafka users:
+* authentication (identity)
+* authorization (permissions)
+
+`User Operator` assumes it is the only tool used to manage Kafka users.   
+
+You can declare a `KafkaUser` as part of your deployment.  
+User credentials will be created in a `Secret`.  
+
+Prerequisites:
+* `Cluster Operator` is deployed
+* `Kafka` resource exists
+* `.spec.entityOperator` object exists in `Kafka`
+
+```
+apiVersion: kafka.strimzi.io/v1beta1
+kind: Kafka
+metadata:
+  name: Kafka-Cluster
+spec:
+  ...
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+```
+
+Deploy the Kafka cluster and with it, the `Topic Operator`.  
 
 ### Strimzi Administrators
 

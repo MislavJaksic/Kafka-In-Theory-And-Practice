@@ -11,3 +11,7 @@ Optional and recommended:
 default.key.serde: default record key serialization/deserialization
 default.value.serde: default record value serialization/deserialization
 ```
+
+### Kafka Streams TLS
+
+[TODO](DeveloperGuide/StreamsSecurity)

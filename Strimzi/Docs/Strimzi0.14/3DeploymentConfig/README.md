@@ -1,3 +1,5 @@
 ## [Deployment configuration](https://strimzi.io/docs/latest/#assembly-deployment-configuration-str)
 
-TODO
+### Kafka Auth
+
+[Instructions](31KafkaClusterConfig)
