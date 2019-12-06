@@ -15,7 +15,7 @@ metadata:
     strimzi.io/cluster: Kafka-Cluster
 spec:
   authentication:
-    type: tls
+    type: tls  # use mTLS
 ...
 ```
 
@@ -36,8 +36,8 @@ metadata:
 type: Opaque
 data:
   ca.crt: ...  # public key of the client Certificate Authority
-  user.crt: ...  # public key of the user
-  user.key: ...  # private key of the user
+  user.crt: ...  # public key of the user; use for mTLS
+  user.key: ...  # private key of the user; use for mTLS
 ```
 
 #### SCRAM-SHA-512 Authentication
@@ -105,25 +105,28 @@ metadata:
   labels:
     strimzi.io/cluster: Kafka-Cluster
 spec:
-  ...
+  ...  # can be any kind of AuthN
   authorization:
-    type: simple
-    acls:
+    type: simple  # use Kafka's ACL plugin SimpleAclAuthorizer
+    acls:  # '*' is a wildcard
       - resource:
           type: topic
-          name: my-topic
+          name: Kafka-Topic
           patternType: literal
-        operation: Read
+        operation: Read  # Consumer can Read
+        host: "*"
       - resource:
           type: topic
-          name: my-topic
+          name: Kafka-Topic
           patternType: literal
-        operation: Describe
+        operation: Describe  # Consumer can Describe
+        host: "*"
       - resource:
           type: group
-          name: my-group
-          patternType: prefix
-        operation: Read
+          name: Consumer-Group-Name
+          patternType: literal
+        operation: Read  # Consumer can be a port of a Consumer Group
+        host: "*"
 ```
 
 #### Super user access to Kafka brokers

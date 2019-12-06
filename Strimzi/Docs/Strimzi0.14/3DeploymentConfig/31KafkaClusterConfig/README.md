@@ -11,7 +11,7 @@ AuthN can be configured for each listener.
 
 AuthN `type`s:
 * none (accepts all connections)
-* TLS client AuthN
+* TLS client AuthN (mTLS)
 * SASL SCRAM-SHA-512
 * OAuth 2.0 token based AuthN
 
@@ -20,7 +20,7 @@ TLS Client AuthN can only be done for TLS listeners.
 ```
 ...
 authentication:
-  type: tls
+  type: tls  # use mTLS
 ...
 ```
 
@@ -39,7 +39,11 @@ spec:
     listeners:
       tls:
         authentication:
-          type: tls
+          type: tls  # use mTLS
+        ...
+      external:
+        authentication:
+          type: tls  # use mTLS
 ...
 ```
 
@@ -58,7 +62,7 @@ ACLs define which users have access to which resources.
 ```
 ...
 authorization:
-  type: simple
+  type: simple  # use Kafka's ACL plugin SimpleAclAuthorizer
 ...
 ```
 
@@ -91,7 +95,7 @@ spec:
   kafka:
     ...
     authorization:
-      type: simple
+      type: simple  # use Kafka's ACL plugin SimpleAclAuthorizer
       superUsers:
         - CN=fred
         - sam

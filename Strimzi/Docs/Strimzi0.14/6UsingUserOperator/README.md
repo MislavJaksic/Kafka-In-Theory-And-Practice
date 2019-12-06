@@ -10,7 +10,7 @@ TODO
 
 mTLS AuthN is used between Kafka and Zookeeper `Pod`s.  
 mTLS AuthN in when both the server and the client present certificates (public keys).  
-In TLS, one party is the authenticator, the other presents an identity.  
+In one-way TLS, one party is the authenticator, the other presents an identity.  
 
 Use mTLS AuthN when:
 * client supports AuthN using mTLS AuthN
@@ -32,25 +32,28 @@ metadata:
     strimzi.io/cluster: Kafka-Cluster
 spec:
   authentication:
-    type: tls
+    type: tls  # use mTLS
   authorization:
-    type: simple
-    acls:
+    type: simple  # use Kafka's ACL plugin SimpleAclAuthorizer
+    acls:  # '*' is a wildcard
       - resource:
           type: topic
-          name: my-topic
+          name: Kafka-Topic
           patternType: literal
-        operation: Read
+        operation: Read  # Consumer can Read
+        host: "*"
       - resource:
           type: topic
-          name: my-topic
+          name: Kafka-Topic
           patternType: literal
-        operation: Describe
+        operation: Describe  # Consumer can Describe
+        host: "*"
       - resource:
           type: group
-          name: my-group
+          name: Consumer-Group-Name
           patternType: literal
-        operation: Read
+        operation: Read  # Consumer can be a port of a Consumer Group
+        host: "*"
 ```
 
 ### SCRAM-SHA authentication

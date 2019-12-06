@@ -1,0 +1,48 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaUser
+metadata:
+  name: User-Name
+  labels:
+    strimzi.io/cluster: Kafka-Cluster
+spec:
+  authentication:
+    type: tls  # use mTLS
+  authorization:
+    type: simple  # use Kafka's ACL plugin SimpleAclAuthorizer
+    acls:  # '*' is a wildcard
+      - resource:
+          type: topic
+          name: Kafka-Topic
+          patternType: literal
+        operation: Read  # Consumer can Read
+        host: "*"
+      - resource:
+          type: topic
+          name: Kafka-Topic
+          patternType: literal
+        operation: Describe  # Consumer can Describe
+        host: "*"
+      - resource:
+          type: group
+          name: Consumer-Group-Name
+          patternType: literal
+        operation: Read  # Consumer can be a port of a Consumer Group
+        host: "*"
+      - resource:
+          type: topic
+          name: Kafka-Topic
+          patternType: literal
+        operation: Write  # Producer can Write
+        host: "*"
+      - resource:
+          type: topic
+          name: Kafka-Topic
+          patternType: literal
+        operation: Create  # Produer can Create
+        host: "*"
+      - resource:
+          type: topic
+          name: Kafka-Topic
+          patternType: literal
+        operation: Describe  # Producer can Describe
+        host: "*"

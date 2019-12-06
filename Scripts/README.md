@@ -51,14 +51,14 @@ $: bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test-topic
 
 Create a console producer:  
 ```
-$: bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test-topic
+$: bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test-topic [--producer.config client.properties]
 ```
 
 ### Consumer
 
 Create a console consumer:  
 ```
-$: bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic [--from-beginning]
+$: bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic [--from-beginning] [--consumer.config client.properties]
 ```
 
 ### Connect
