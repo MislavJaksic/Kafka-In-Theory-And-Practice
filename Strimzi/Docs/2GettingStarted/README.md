@@ -2,7 +2,7 @@
 
 Strimzi benefits from integration with OpenShift (Kubernetes distribution).  
 
-<The guide assumes `kubectl` can reach Kubernetes.  
+The guide assumes `kubectl` can reach Kubernetes.  
 
 [Strimzi release artefacts](https://github.com/strimzi/strimzi-kafka-operator/releases), YAML files, are referenced throughout the docs.  
 `Cluster Operator` can be deployed using a Helm chart.  
