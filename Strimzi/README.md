@@ -20,9 +20,9 @@ $: helm uninstall Release-Name -n K8s-Namespace
 #### Deploy Kafka
 
 ```
-$: kubectl apply -f examples/kafka/kafka-ephemeral.yaml
+$: kubectl apply -f kafka.yaml  # see Research
 
-$: kubectl delete -f examples/kafka/kafka-XYZ.yaml
+$: kubectl delete -f kafka.yaml
 ```
 
 #### Deploy KafkaTopic
@@ -30,7 +30,7 @@ $: kubectl delete -f examples/kafka/kafka-XYZ.yaml
 Configure and create a Kafka topic.  
 
 ```
-$: kubectl apply -f examples/topic/kafka-topic.yaml
+$: kubectl apply -f topic.yaml  # see Research
 ```
 
 #### Deploy KafkaUser
@@ -38,7 +38,7 @@ $: kubectl apply -f examples/topic/kafka-topic.yaml
 Manage user ACLs, create users and their AuthN/AuthZ `Secret`s.  
 
 ```
-$: kubectl apply -f examples/topic/kafka-user.yaml
+$: kubectl apply -f user.yaml  # see Research
 ```
 
 ### Connect to Strimzi
