@@ -10,7 +10,7 @@ spec:
       strimzi.io/kind: Kafka
   namespaceSelector:
     matchNames:
-      - strimzi
+      - K8s-Namespace  # change to Strimzi's K8s-Namespace
   endpoints:
   #### job_name: kubernetes-cadvisor
   # configured in additional secret

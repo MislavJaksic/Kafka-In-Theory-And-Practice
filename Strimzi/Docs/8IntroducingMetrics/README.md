@@ -1,6 +1,6 @@
 ## [Introducing Metrics](https://strimzi.io/docs/latest/#assembly-metrics-setup-str)
 
-Monitor Strimzi Kafka, ZooKeeper and Kafka Connect with Prometheus and Grafana.  
+Monitor Strimzi `Kafka`, `ZooKeeper` and `Kafka Connect` with [Prometheus](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/DevOps/Monitoring/Prometheus) and [Grafana](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/Visualize/Grafana).  
 
 You can also use [Kafka Exporter](../10KafkaExporter).  
 
@@ -16,35 +16,27 @@ To expose metrics, edit the `Kafka` resource. See `Research`.
 
 ### Prometheus
 
-Uses the CoreOS Prometheus Operator to manage Prometheus server.  
+Uses the CoreOS [`Prometheus Operator`](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/DevOps/Monitoring/Prometheus/PrometheusKubernetesOperator) to manage Prometheus server.  
 Deploy:
-* the Prometheus Operator
-* the Prometheus server
+* the `Prometheus Operator`
+* the `Prometheus Server`
 
+Deploy `Prometheus Operator` RBAC resources:
 ```
-$: curl -s https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/rbac/prometheus-operator/prometheus-operator-deployment.yaml | sed -e 's/namespace: .*/namespace: K8s-Namespace/' > prometheus-operator-deployment.yaml
-$: curl -s https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/rbac/prometheus-operator/prometheus-operator-cluster-role.yaml > prometheus-operator-cluster-role.yaml
-$: curl -s https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/rbac/prometheus-operator/prometheus-operator-cluster-role-binding.yaml | sed -e 's/namespace: .*/namespace: K8s-Namespace/' > prometheus-operator-cluster-role-binding.yaml
-$: curl -s https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/rbac/prometheus-operator/prometheus-operator-service-account.yaml | sed -e 's/namespace: .*/namespace: K8s-Namespace/' > prometheus-operator-service-account.yaml
-
-$: kubectl apply -f prometheus-operator-deployment.yaml
-$: kubectl apply -f prometheus-operator-cluster-role.yaml
-$: kubectl apply -f prometheus-operator-cluster-role-binding.yaml
-$: kubectl apply -f prometheus-operator-service-account.yaml
+$: kubectl apply -f Operator/prometheus-operator-rbac.yaml  # see Research
 ```
 
+Deploy `Prometheus`:
 ```
-$: sed -i 's/namespace: .*/namespace: K8s-Namespace/' prometheus.yaml  # see Research
+# Note: see Research
 
-# Note: edit strimzi-service-monitor.yaml namespace selector  # see Research
-
-3. ??? required step?
-
-4. does nothing - there is not namespace to replace
+$: kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml
 
 $: kubectl apply -f strimzi-service-monitor.yaml
 $: kubectl apply -f prometheus-rules.yaml
 $: kubectl apply -f prometheus.yaml
+
+$: kubectl apply -f prometheus-nodeport.yaml
 ```
 
 ### Prometheus Alertmanager
@@ -53,7 +45,7 @@ TODO
 
 ### Grafana
 
-Grafana provides visualizations of Prometheus metrics.
+`Grafana` provides visualizations of `Prometheus` metrics.
 
 You can deploy and enable the example Grafana dashboards provided with Strimzi.
 8.5.1. Grafana configuration

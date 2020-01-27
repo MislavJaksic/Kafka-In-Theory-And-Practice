@@ -43,7 +43,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: prometheus-server
-    namespace: monitoring
+    namespace: K8s-Monitoring-Namespace  # change
 
 ---
 apiVersion: monitoring.coreos.com/v1
