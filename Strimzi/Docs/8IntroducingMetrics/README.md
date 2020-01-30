@@ -16,14 +16,14 @@ To expose metrics, edit the `Kafka` resource. See `Research`.
 
 ### Prometheus
 
-Uses the CoreOS [`Prometheus Operator`](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/DevOps/Monitoring/Prometheus/PrometheusKubernetesOperator) to manage Prometheus server.  
+Uses the CoreOS [`Prometheus Operator`](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/DevOps/Monitoring/Prometheus/PrometheusKubernetesOperator) to manage `Prometheus Server`.  
 Deploy:
 * the `Prometheus Operator`
 * the `Prometheus Server`
 
-Deploy `Prometheus Operator` RBAC resources:
+Deploy `Prometheus Operator` `RBAC` resources:
 ```
-$: kubectl apply -f Operator/prometheus-operator-rbac.yaml  # see Research
+$: kubectl apply -f prometheus-operator-rbac.yaml  # see Research
 ```
 
 Deploy `Prometheus`:
@@ -34,6 +34,7 @@ $: kubectl create secret generic additional-scrape-configs --from-file=prometheu
 
 $: kubectl apply -f strimzi-service-monitor.yaml
 $: kubectl apply -f prometheus-rules.yaml
+$: kubectl apply -f prometheus-rbac.yaml
 $: kubectl apply -f prometheus.yaml
 
 # Note: visit http://Kubectl-Server-Ip:30900

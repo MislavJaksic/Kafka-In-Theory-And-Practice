@@ -1,6 +1,6 @@
-## [Kafka cluster configuration](https://strimzi.io/docs/0.14.0/#assembly-deployment-configuration-kafka-str)
+## [3.1. Kafka cluster configuration](https://strimzi.io/docs/0.14.0/#assembly-deployment-configuration-kafka-str)
 
-### Authentication and Authorization (AuthN and AuthZ)
+### 3.1.7. Authentication and Authorization (AuthN and AuthZ)
 
 AuthN can be configured for each listener.  
 AuthZ is configured for the entire cluster.  
@@ -11,11 +11,11 @@ AuthN can be configured for each listener.
 
 AuthN `type`s:
 * none (accepts all connections)
-* TLS client AuthN (mTLS)
-* SASL SCRAM-SHA-512
-* OAuth 2.0 token based AuthN
+* `TLS` client AuthN (`mTLS`)
+* `SASL` `SCRAM-SHA-512`
+* `OAuth` 2.0 token based AuthN
 
-TLS Client AuthN can only be done for TLS listeners.  
+`TLS` Client AuthN can only be done for `TLS` listeners.  
 
 ```
 ...
@@ -52,12 +52,12 @@ spec:
 AuthZ is configured for the entire cluster.  
 
 AuthZ `type`s:
-* simple (uses Kafka's Access Control Lists (ACLs) plugin)
+* simple (uses `Kafka`'s `Access Control List`s [`ACL`s] plugin)
 
 Additionally, you can list the `superUsers`.  
 
-`SimpleAclAuthorizer` is the default Access Control Lists (ACLs) AuthZ plugin for Kafka.  
-ACLs define which users have access to which resources.  
+`SimpleAclAuthorizer` is the default `Access Control List`s (`ACL`s) AuthZ plugin for `Kafka`.  
+`ACL`s define which users have access to which resources.  
 
 ```
 ...
@@ -66,11 +66,9 @@ authorization:
 ...
 ```
 
-Super users
-
 `superUsers` can access all resources, regardless of ACLs.  
 
-If TLS Client Authentication is used, the username will be: `CN=Certificate-Subject-Common-Name`.  
+If `TLS` Client Authentication is used, the username will be: `CN=Certificate-Subject-Common-Name`.  
 ```
 ...
 authorization:

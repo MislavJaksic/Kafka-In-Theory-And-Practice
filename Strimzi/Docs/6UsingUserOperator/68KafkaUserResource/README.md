@@ -1,4 +1,4 @@
-## [Kafka User resource](https://strimzi.io/docs/0.14.0/#ref-kafka-user-using-uo)
+## [6.8. Kafka User resource](https://strimzi.io/docs/latest/#ref-kafka-user-using-uo)
 
 `KafkaUser` declares a user with its AuthN and AuthZ mechanisms and access rights.  
 
@@ -20,10 +20,10 @@ spec:
 ```
 
 Creates a `Secret` with:
-* public (a.k.a. certificate) and private key to be used for TLS Client Authentication
+* public (a.k.a. certificate) and private key to be used for `TLS` Client Authentication
 * public key of the client certification authority which was used to sign the user certificate
 
-All keys are in X509 format.  
+All keys are in `X509` format.  
 
 ```
 apiVersion: v1
@@ -48,8 +48,8 @@ TODO
 
 #### Simple authorization
 
-`SimpleAclAuthorizer` is the default Access Control Lists (ACLs) AuthZ plugin for Kafka.  
-ACL rules grant access rights to users.  
+`SimpleAclAuthorizer` is the default `Access Control List`s (`ACL`s) AuthZ plugin for `Kafka`.  
+`ACL` rules grant access rights to users.  
 `AclRule` is specified as a set of properties:
 * `resource`
 * `type`
@@ -60,7 +60,7 @@ ACL rules grant access rights to users.
 
 `type`s:
 * `topic`
-* `group` (for Consumer Groups)
+* `group` (for `Consumer Group`s)
 * `cluster`
 * `transactionalId`
 
@@ -131,4 +131,4 @@ spec:
 
 #### Super user access to Kafka brokers
 
-`superUsers` defined in a the Kafka broker configuration ignore ACLs.  
+`superUsers` defined in a the `Kafka` broker configuration ignore `ACL`s.  

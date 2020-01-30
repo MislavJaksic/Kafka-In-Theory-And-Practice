@@ -117,3 +117,38 @@ $: bin/kafka-console-consumer --bootstrap-server Kubectl-Server-IP:Node-Port -to
 ```
 
 [Instructions](Other/ClientmTLS)
+
+### Strimzi monitoring
+
+[Instructions](Docs/8IntroducingMetrics)
+
+#### Prometheus
+
+```
+$: kubectl apply -f Operator/prometheus-operator-rbac.yaml  # see Research
+
+$: kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml  # see Research
+
+$: kubectl apply -f strimzi-service-monitor.yaml
+$: kubectl apply -f prometheus-rules.yaml
+$: kubectl apply -f prometheus.yaml
+
+# Note: visit http://Kubectl-Server-Ip:30900
+```
+
+#### Grafana
+
+```
+$: kubectl apply -f grafana.yaml  # see Research
+
+# Note: visit http://Kubectl-Server-Ip:30901/login
+
+# Login: admin
+# Password: admin
+
+# Add Data Source -> Prometheus ->
+#  URL: http://prometheus-operated:9090
+# Save and Test
+
+# Dashboards -> Import -> Copy-paste URL, ID or JSON
+```

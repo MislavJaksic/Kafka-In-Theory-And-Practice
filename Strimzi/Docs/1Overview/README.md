@@ -1,4 +1,4 @@
-## [Overview of Strimzi](https://strimzi.io/docs/latest/#overview-str)
+## [1. Overview of Strimzi](https://strimzi.io/docs/latest/#overview-str)
 
 Strimzi runs Kafka on Kubernetes.  
 

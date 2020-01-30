@@ -1,26 +1,20 @@
-## [Using the User Operator](https://strimzi.io/docs/0.14.0/#assembly-using-the-user-operator-str)
+## [6. Using the User Operator](https://strimzi.io/docs/latest/#assembly-using-the-user-operator-str)
 
-TODO
+### 6.2. Mutual TLS authentication (mTLS AuthN)
 
-### Overview of the User Operator component
+`mTLS` AuthN is used between `Kafka` and `Zookeeper` `Pod`s.  
+`mTLS` AuthN in when both the server and the client present certificates (public keys).  
+In one-way `TLS`, one party is the authenticator, the other presents an identity.  
 
-TODO
-
-### Mutual TLS authentication (mTLS AuthN)
-
-mTLS AuthN is used between Kafka and Zookeeper `Pod`s.  
-mTLS AuthN in when both the server and the client present certificates (public keys).  
-In one-way TLS, one party is the authenticator, the other presents an identity.  
-
-Use mTLS AuthN when:
-* client supports AuthN using mTLS AuthN
-* it is necessary to use the TLS certificates rather than passwords
+Use `mTLS` AuthN when:
+* client supports AuthN using `mTLS` AuthN
+* it is necessary to use the `TLS` certificates rather than passwords
 * you can reconfigure and restart clients so that they do not use expired certificates
 
-#### Creating a Kafka user with mutual TLS authentication
+#### 6.3. Creating a Kafka user with mutual TLS authentication
 
 Prerequisites:
-* `Kafka` resource has a TLS listener
+* `Kafka` resource has a `TLS` listener
 * `.spec.entityOperator` object exists in `Kafka`
 
 ```
