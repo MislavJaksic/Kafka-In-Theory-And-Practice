@@ -1,9 +1,17 @@
 apiVersion: kafka.strimzi.io/v1beta1
 kind: KafkaUser
 metadata:
-  name: User-Name
+  name: User-Name  # change
   labels:
-    strimzi.io/cluster: Kafka-Cluster
+    strimzi.io/cluster: Kafka-Cluster  # change
+  namespace: K8s-Strimzi-Namespace  # change
+  annotations:
+    developer/name: "Mislav Jakšić"
+    developer/email: "jaksicmislav@gmail.com"
+    developer/url: "https://github.com/MislavJaksic"
+    developer/role: "technical lead"
+    developer/timezone: "Europe/Zagreb"
+    developer/picUrl: "https://images.app.goo.gl/PCHZgd8oattge1i96"
 spec:
   authentication:
     type: tls  # use mTLS

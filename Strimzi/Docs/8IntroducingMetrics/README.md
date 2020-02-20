@@ -33,7 +33,7 @@ Deploy `Prometheus`:
 $: kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml
 
 $: kubectl apply -f strimzi-service-monitor.yaml
-$: kubectl apply -f prometheus-rules.yaml
+$: kubectl apply -f prometheus-alerting-rules.yaml
 $: kubectl apply -f prometheus-rbac.yaml
 $: kubectl apply -f prometheus.yaml
 

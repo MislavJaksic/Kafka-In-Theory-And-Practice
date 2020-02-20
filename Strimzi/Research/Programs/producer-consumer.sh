@@ -1,11 +1,11 @@
 #!/bin/bash
 
-KAFKA_PATH=/path/to/kafka_X
+KAFKA_PATH=/path/to/kafka_X  # change
 
-KAFKA_HOST=Kubectl-Server-Ip
+KAFKA_HOST=Kubectl-Server-Ip  # change
 KAFKA_PORT=31000
-SOURCE_TOPIC=test-topic
-SINK_TOPIC=test-topic
+SOURCE_TOPIC=Topic-Name  # change
+SINK_TOPIC=Topic-Name  # change
 
 gnome-terminal -e "bash -c '$KAFKA_PATH/bin/kafka-console-producer.sh --broker-list $KAFKA_HOST:$KAFKA_PORT --topic $SOURCE_TOPIC'"
 

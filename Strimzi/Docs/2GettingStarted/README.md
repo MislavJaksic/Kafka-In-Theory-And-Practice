@@ -56,11 +56,11 @@ Prerequisites:
 * Kubernetes user account which is able to create `CustomResourceDefinitions`, `ClusterRoles` and `ClusterRoleBindings` (Role Base Access Control (RBAC), permission to create, edit, and delete these resources, `system:admin`)
 
 ```
-# Note: `K8s-Namespace` could be `kafka-ns`, `strimzi-ns`, ...
+# Note: `K8s-Strimzi-Namespace` could be `kafka-ns`, `strimzi-ns`, ...
 
-$: kubectl create namespace K8s-Namespace
+$: kubectl create namespace K8s-Strimzi-Namespace
 
-$: sed -i 's/namespace: .*/namespace: K8s-Namespace/' install/cluster-operator/*RoleBinding*.yaml
+$: sed -i 's/namespace: .*/namespace: K8s-Strimzi-Namespace/' install/cluster-operator/*RoleBinding*.yaml
 
 $: kubectl apply -f install/cluster-operator
 ```
@@ -78,13 +78,13 @@ Prerequisites:
 * Helm has to be installed in the Kubernetes cluster (before Helm 3.x)
 
 ```
-# Note: create `Cluster Operator` in `K8s-Namespace` and make it watch `K8s-Namespace`
+# Note: create `Cluster Operator` in `K8s-Strimzi-Namespace` and make it watch `K8s-Strimzi-Namespace`
 
 $: helm repo add strimzi https://strimzi.io/charts/
-$: helm install Release-Name strimzi/strimzi-kafka-operator -n K8s-Namespace  
+$: helm install Release-Name strimzi/strimzi-kafka-operator -n K8s-Strimzi-Namespace  
 
-$: helm list -n K8s-Namespace
-$: helm uninstall Release-Name -n K8s-Namespace
+$: helm list -n K8s-Strimzi-Namespace
+$: helm uninstall Release-Name -n K8s-Strimzi-Namespace
 ```
 
 #### 2.3.7. Deploying the Cluster Operator from OperatorHub.io

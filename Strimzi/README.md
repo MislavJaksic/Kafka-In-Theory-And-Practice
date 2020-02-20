@@ -8,21 +8,21 @@ You can also look at [Research YAML](Research/YAML).
 #### Cluster Operator
 
 ```
-# Note: create `Cluster Operator` in `K8s-Namespace` and make it watch `K8s-Namespace`
+$: kubectl create namespace K8s-Strimzi-Namespace
 
 $: helm repo add strimzi https://strimzi.io/charts/
-$: helm install Release-Name strimzi/strimzi-kafka-operator -n K8s-Namespace  
+$: helm install Release-Name strimzi/strimzi-kafka-operator -n K8s-Strimzi-Namespace  
 
-$: helm list -n K8s-Namespace
-$: helm uninstall Release-Name -n K8s-Namespace
+$: helm list -n K8s-Strimzi-Namespace
+$: helm uninstall Release-Name -n K8s-Strimzi-Namespace
 ```
 
 #### Deploy Kafka
 
 ```
-$: kubectl apply -f kafka.yaml  # see Research
+$: kubectl apply -f kafka-ephemeral-nodeport-mtls-metrics.yaml  # see Research
 
-$: kubectl delete -f kafka.yaml
+$: kubectl delete -f kafka-ephemeral-nodeport-mtls-metrics.yaml
 ```
 
 #### Deploy KafkaTopic
@@ -125,30 +125,16 @@ $: bin/kafka-console-consumer --bootstrap-server Kubectl-Server-IP:Node-Port -to
 #### Prometheus
 
 ```
-$: kubectl apply -f Operator/prometheus-operator-rbac.yaml  # see Research
+# Note: setup Prometheus Operator, but not the Prometheus Resource
 
-$: kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml  # see Research
+$: kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml -n K8s-Monitoring-Namespace  # see Research
 
-$: kubectl apply -f strimzi-service-monitor.yaml
-$: kubectl apply -f prometheus-rules.yaml
-$: kubectl apply -f prometheus.yaml
-
-# Note: visit http://Kubectl-Server-Ip:30900
+$: kubectl apply -f service-monitor.yaml
+$: kubectl apply -f prometheus-alerting-rules.yaml
 ```
 
 #### Grafana
 
 ```
-$: kubectl apply -f grafana.yaml  # see Research
-
-# Note: visit http://Kubectl-Server-Ip:30901/login
-
-# Login: admin
-# Password: admin
-
-# Add Data Source -> Prometheus ->
-#  URL: http://prometheus-operated:9090
-# Save and Test
-
-# Dashboards -> Import -> Copy-paste URL, ID or JSON
+# Note: deploy Grafana in Kubenretes
 ```
