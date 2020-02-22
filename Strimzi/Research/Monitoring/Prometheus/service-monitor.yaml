@@ -122,7 +122,6 @@ spec:
 
   #### job_name: kubernetes-services
   # configured in additional secret
-  # port: prometheus
   - honorLabels: true    # alternative to additional secret
     interval: 10s
     scrapeTimeout: 10s

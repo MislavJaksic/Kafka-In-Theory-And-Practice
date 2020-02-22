@@ -122,19 +122,10 @@ $: bin/kafka-console-consumer --bootstrap-server Kubectl-Server-IP:Node-Port -to
 
 [Instructions](Docs/8IntroducingMetrics)
 
-#### Prometheus
+#### Using kube-prometheus
+
+[Deploy kube-prometheus](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/DevOps/Observability/Monitoring/Prometheus/kube-prometheus)
 
 ```
-# Note: setup Prometheus Operator, but not the Prometheus Resource
-
-$: kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml -n K8s-Monitoring-Namespace  # see Research
-
-$: kubectl apply -f service-monitor.yaml
-$: kubectl apply -f prometheus-alerting-rules.yaml
-```
-
-#### Grafana
-
-```
-# Note: deploy Grafana in Kubenretes
+$: kubectl apply -f service-monitor.yaml  # see Research
 ```

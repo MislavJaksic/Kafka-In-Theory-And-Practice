@@ -1,5 +1,9 @@
 ## [Introducing Metrics](https://strimzi.io/docs/latest/#assembly-metrics-setup-str)
 
+```
+Note: consider using kube-prometheus!
+```
+
 Monitor Strimzi `Kafka`, `ZooKeeper` and `Kafka Connect` with [Prometheus](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/DevOps/Monitoring/Prometheus) and [Grafana](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/Visualize/Grafana).  
 
 You can also use [Kafka Exporter](../10KafkaExporter).  
