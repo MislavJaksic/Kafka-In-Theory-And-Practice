@@ -1,6 +1,6 @@
-### [6. Operations](http://kafka.apache.org/documentation/#operations) 
+## [6. Operations](http://kafka.apache.org/documentation/#operations)
 
-#### [6.1. Kafka Operations](http://kafka.apache.org/documentation/#basic_ops)
+### [6.1. Kafka Operations](http://kafka.apache.org/documentation/#basic_ops)
 
 ```
 Adding, removing, modifying topics.  
@@ -19,18 +19,21 @@ Setting quotas.
 
 TODO  
 
-#### [6.2. Datacenters](http://kafka.apache.org/documentation/#datacenters)
+#### [Mirroring data between clusters](https://kafka.apache.org/documentation/#basic_ops_mirror_maker)
 
-Questions and answers concerning multiple datacenters.  
+Create Kafka cluster replicas.  
+Source and destination clusters can have different numbers of partitions and offsets.  
 
-TODO  
+### [6.2. Datacenters](http://kafka.apache.org/documentation/#datacenters)
 
-#### [6.3. Important Configuration](http://kafka.apache.org/documentation/#config)
+Don't run a single Kafka cluster that spans multiple datacentres over a high-latency link.  
+
+### [6.3. Important Configuration](http://kafka.apache.org/documentation/#config)
 
 Kafka has a lot of different [configuration settings](http://kafka.apache.org/documentation/#configuration).  
 
 See a sample production server configuration.  
 
-#### [6.6 Monitoring](https://kafka.apache.org/documentation/#monitoring)
+### [6.6 Monitoring](https://kafka.apache.org/documentation/#monitoring)
 
 See the special Monitoring [folder](https://github.com/MislavJaksic/Kafka-In-Theory-And-Practice/tree/master/Monitoring).  

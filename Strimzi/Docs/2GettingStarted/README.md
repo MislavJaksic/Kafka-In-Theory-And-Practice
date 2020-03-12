@@ -138,7 +138,14 @@ TODO
 
 ### 2.6. Kafka Mirror Maker
 
-TODO
+`Mirror Maker` replicates data between Kafka clusters.  
+
+Prerequisites:
+* `Cluster Operator` is deployed
+
+```
+$: apply -f examples/kafka-mirror-maker/kafka-mirror-maker.yaml
+```
 
 ### 2.7. Kafka Bridge
 

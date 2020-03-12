@@ -1,0 +1,21 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaMirrorMaker
+metadata:
+  name: Mirror-Maker-Name  # change
+spec:
+  version: 2.4.0
+  replicas: 1
+  consumer:
+    bootstrapServers: Source-Kafka-Cluster-Ip-Port  # change
+    groupId: Source-Kafka-Cluster-Group-Id  # change
+    # tls:
+    #   trustedCertificates:
+    #     - secretName: Source-Kafka-Cluster-Ca-Cert  # change
+    #       certificate: ca.crt
+  producer:
+    bootstrapServers: Target-Kafka-Cluster-Ip-Port  # change
+    # tls:
+    #   trustedCertificates:
+    #     - secretName: Target-Kafka-Cluster-Ca-Cert  # change
+    #       certificate: ca.crt
+  whitelist: ".*"  # what topics are mirrored
