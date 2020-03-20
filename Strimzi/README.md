@@ -20,9 +20,9 @@ $: helm uninstall Release-Name -n K8s-Strimzi-Namespace
 #### Deploy Kafka
 
 ```
-$: kubectl apply -f kafka-ephemeral-nodeport-mtls-metrics.yaml  # see Research
+$: kubectl apply -f kafka-nodeport.yaml  # see Research
 
-$: kubectl delete -f kafka-ephemeral-nodeport-mtls-metrics.yaml
+$: kubectl delete -f kafka-nodeport.yaml
 ```
 
 #### Deploy KafkaTopic
@@ -73,6 +73,12 @@ $: bin/kafka-console-consumer --bootstrap-server Kubectl-Server-IP:Node-Port -to
 ```
 
 [Instructions](Blog/AccessingKafka2Nodeports)
+
+#### LoadBalancer
+
+```
+$: bin/kafka-console-producer.sh --broker-list LoadBalancer-Hostname-Ip:9094 --topic Topic-Name
+```
 
 ### Strimzi security
 

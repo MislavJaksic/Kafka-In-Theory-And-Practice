@@ -31,13 +31,13 @@ spec:
         overrides:
           bootstrap:
             nodePort: 31000
-          brokers:  # must equal the number of replicas
-          - broker: 0
-            advertisedHost: Kubectl-Server-Ip  # change
-          - broker: 1
-            advertisedHost: Kubectl-Server-Ip
-          - broker: 2
-            advertisedHost: Kubectl-Server-Ip
+          # brokers:  # optinal; must equal the number of replicas
+          # - broker: 0
+          #   advertisedHost: Kubectl-Server-Ip  # change
+          # - broker: 1
+          #   advertisedHost: Kubectl-Server-Ip
+          # - broker: 2
+          #   advertisedHost: Kubectl-Server-Ip
     # authorization:  # enable TLS
     #   type: simple  # use Kafka's ACL plugin SimpleAclAuthorizer
     #   superUsers:  # ignore ACLs
