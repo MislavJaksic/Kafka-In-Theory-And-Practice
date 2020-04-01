@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kaman-deployment
+  labels:
+    app: kaman-deployment-app
+  namespace: {{ .Values.kubernetesStrimziNamespace }}  # change
+  annotations:
+    developer/name: "Mislav Jakšić"
+    developer/email: "jaksicmislav@gmail.com"
+    developer/url: "https://github.com/MislavJaksic"
+    developer/role: "technical lead"
+    developer/timezone: "Europe/Zagreb"
+    developer/picUrl: "https://images.app.goo.gl/PCHZgd8oattge1i96"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: kaman-tier
+  template:
+    metadata:
+      labels:
+        tier: kaman-tier
+    spec:
+      containers:
+      - name: kaman
+        image: datafluxgmbh/kaman:0.0.6
+        ports:
+        - name: kaman
+          containerPort: 8080
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kaman-service
+  labels:
+    app: kaman-service-app
+  namespace: {{ .Values.kubernetesStrimziNamespace }}  # change
+  annotations:
+    developer/name: "Mislav Jakšić"
+    developer/email: "jaksicmislav@gmail.com"
+    developer/url: "https://github.com/MislavJaksic"
+    developer/role: "technical lead"
+    developer/timezone: "Europe/Zagreb"
+    developer/picUrl: "https://images.app.goo.gl/PCHZgd8oattge1i96"
+spec:
+  ports:
+  - name: kaman
+    nodePort: 31500
+    targetPort: 8080
+    port: 8080
+    protocol: TCP
+  selector:
+    tier: kaman-tier
+  type: NodePort

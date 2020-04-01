@@ -1,0 +1,21 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: test-topic  # change
+  labels:
+    strimzi.io/cluster: {{ .Values.kafkaClusterName }}  # change
+  namespace: {{ .Values.kubernetesStrimziNamespace }}  # change
+  annotations:
+    developer/name: "Mislav Jakšić"
+    developer/email: "jaksicmislav@gmail.com"
+    developer/url: "https://github.com/MislavJaksic"
+    developer/role: "technical lead"
+    developer/timezone: "Europe/Zagreb"
+    developer/picUrl: "https://images.app.goo.gl/PCHZgd8oattge1i96"
+spec:
+  partitions: 2
+  replicas: 2
+  config:
+    retention.ms: 3600000  # 1h
+    retention.bytes: 6500000  # 6.5Mi; topic partitions * retention.bytes = max topic size
+
