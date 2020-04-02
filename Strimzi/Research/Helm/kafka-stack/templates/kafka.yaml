@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.kafkaClusterName }}  # change
   labels:
     app: {{ .Values.kafkaClusterName }}-app  # change
-  namespace: {{ .Values.kubernetesStrimziNamespace }}  # change
+  namespace: {{ .Release.Namespace }}  # change
   annotations:
     developer/name: "Mislav Jakšić"
     developer/email: "jaksicmislav@gmail.com"

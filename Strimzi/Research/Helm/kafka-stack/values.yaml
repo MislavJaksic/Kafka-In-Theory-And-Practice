@@ -1,3 +1,1 @@
 kafkaClusterName: "kafka-cluster-0"
-
-kubernetesStrimziNamespace: "strimzi"

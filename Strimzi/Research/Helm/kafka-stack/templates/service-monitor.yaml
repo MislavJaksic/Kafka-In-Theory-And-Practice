@@ -5,7 +5,7 @@ metadata:
   name: strimzi-service-monitor
   labels:
     monitor: dataflux  # change
-  namespace: {{ .Values.kubernetesStrimziNamespace }}  # change
+  namespace: {{ .Release.Namespace }}  # change
   annotations:
     developer/name: "Mislav Jakšić"
     developer/email: "jaksicmislav@gmail.com"
@@ -19,7 +19,7 @@ spec:
       strimzi.io/kind: Kafka
   namespaceSelector:
     matchNames:
-      - {{ .Values.kubernetesStrimziNamespace }}  # change
+      - {{ .Release.Namespace }}  # change
   endpoints:
   #### job_name: kubernetes-cadvisor
   # configured in additional secret

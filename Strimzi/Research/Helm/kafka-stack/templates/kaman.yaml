@@ -4,7 +4,7 @@ metadata:
   name: kaman-deployment
   labels:
     app: kaman-deployment-app
-  namespace: {{ .Values.kubernetesStrimziNamespace }}  # change
+  namespace: {{ .Release.Namespace }}  # change
   annotations:
     developer/name: "Mislav Jakšić"
     developer/email: "jaksicmislav@gmail.com"
@@ -36,7 +36,7 @@ metadata:
   name: kaman-service
   labels:
     app: kaman-service-app
-  namespace: {{ .Values.kubernetesStrimziNamespace }}  # change
+  namespace: {{ .Release.Namespace }}  # change
   annotations:
     developer/name: "Mislav Jakšić"
     developer/email: "jaksicmislav@gmail.com"
