@@ -144,7 +144,7 @@ Prerequisites:
 * `Cluster Operator` is deployed
 
 ```
-$: apply -f examples/kafka-mirror-maker/kafka-mirror-maker.yaml
+$: apply -f examples/kafka-mirror-maker/kafka-mirror-maker-2.yaml
 ```
 
 ### 2.7. Kafka Bridge

@@ -1,9 +1,8 @@
 ## [Strimzi](https://strimzi.io/)
 
 [Strimzi release artefacts](https://github.com/strimzi/strimzi-kafka-operator/releases), YAML files, are referenced throughout the documentation.  
-You can also look at [Research YAML](Research/YAML).  
 
-### Deploy Strimzi
+### Create
 
 #### Cluster Operator
 
@@ -11,7 +10,7 @@ You can also look at [Research YAML](Research/YAML).
 $: kubectl create namespace K8s-Strimzi-Namespace
 
 $: helm repo add strimzi https://strimzi.io/charts/
-$: helm install Release-Name strimzi/strimzi-kafka-operator -n K8s-Strimzi-Namespace  
+$: helm install Release-Name strimzi/strimzi-kafka-operator -n K8s-Strimzi-Namespace
 
 $: helm list -n K8s-Strimzi-Namespace
 $: helm uninstall Release-Name -n K8s-Strimzi-Namespace
@@ -27,21 +26,17 @@ $: kubectl delete -f kafka-nodeport.yaml
 
 #### Deploy KafkaTopic
 
-Configure and create a Kafka topic.  
-
 ```
 $: kubectl apply -f topic.yaml  # see Research
 ```
 
 #### Deploy KafkaUser
 
-Manage user ACLs, create users and their AuthN/AuthZ `Secret`s.  
-
 ```
 $: kubectl apply -f user.yaml  # see Research
 ```
 
-### Connect to Strimzi
+### Access
 
 #### NodePort
 
@@ -50,7 +45,7 @@ $: bin/kafka-console-producer.sh --broker-list Kubectl-Server-IP:Node-Port --top
 $: bin/kafka-console-consumer.sh --bootstrap-server Kubectl-Server-IP:Node-Port --topic Topic-Name [--from-beginning]
 ```
 
-You can also enable TLS.  
+#### NodePort using TLS
 
 ```
 $: kubectl get secret Kafka-Cluster-cluster-ca-cert -o jsonpath='{.data.ca\.crt}' | base64 -d > Cluster-CA.crt
@@ -80,7 +75,23 @@ $: bin/kafka-console-consumer --bootstrap-server Kubectl-Server-IP:Node-Port -to
 $: bin/kafka-console-producer.sh --broker-list LoadBalancer-Hostname-Ip:9094 --topic Topic-Name
 ```
 
-### Strimzi security
+### Monitoring
+
+[Instructions](Docs/8IntroducingMetrics)
+
+#### Using kube-prometheus
+
+[Deploy kube-prometheus](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/DevOps/Observability/Monitoring/Prometheus/kube-prometheus)
+
+```
+$: kubectl apply -f service-monitor.yaml  # see Research
+```
+
+### Cluster replication
+
+TODO
+
+### Security
 
 #### mTLS
 
@@ -123,15 +134,3 @@ $: bin/kafka-console-consumer --bootstrap-server Kubectl-Server-IP:Node-Port -to
 ```
 
 [Instructions](Other/ClientmTLS)
-
-### Strimzi monitoring
-
-[Instructions](Docs/8IntroducingMetrics)
-
-#### Using kube-prometheus
-
-[Deploy kube-prometheus](https://github.com/MislavJaksic/Knowledge-Repository/tree/master/Technology/DevOps/Observability/Monitoring/Prometheus/kube-prometheus)
-
-```
-$: kubectl apply -f service-monitor.yaml  # see Research
-```
