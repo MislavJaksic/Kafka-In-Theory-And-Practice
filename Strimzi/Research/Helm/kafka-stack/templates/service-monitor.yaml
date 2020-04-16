@@ -1,11 +1,11 @@
-# use prometheus-additional.yaml for Strimzi Service monitoring
+{{- if .Values.monitoringNamespace }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: strimzi-service-monitor
   labels:
     monitor: dataflux  # change
-  namespace: {{ .Release.Namespace }}  # change
+  namespace: {{ .Values.monitoringNamespace }}  # change
   annotations:
     developer/name: "Mislav Jakšić"
     developer/email: "jaksicmislav@gmail.com"
@@ -211,3 +211,4 @@ spec:
 
   #### job_name: kubernetes-nodes-kubelet
   # configured in additional secret
+{{- end }}
