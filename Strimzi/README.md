@@ -10,7 +10,7 @@
 $: kubectl create namespace K8s-Strimzi-Namespace
 
 $: helm repo add strimzi https://strimzi.io/charts/
-$: helm install Release-Name strimzi/strimzi-kafka-operator -n K8s-Strimzi-Namespace
+$: helm install Release-Name strimzi/strimzi-kafka-operator -f config-operator.yaml -n K8s-Strimzi-Namespace  # see Research
 
 $: helm list -n K8s-Strimzi-Namespace
 $: helm uninstall Release-Name -n K8s-Strimzi-Namespace

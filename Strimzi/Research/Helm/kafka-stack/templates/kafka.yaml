@@ -31,6 +31,15 @@ spec:
         overrides:
           bootstrap:
             nodePort: 31000
+{{- if .Values.advertisedHostIpOverride }}
+          brokers:  # optional; must equal the number of replicas
+          - broker: 0
+            advertisedHost: {{ .Values.advertisedHostIpOverride }}  # change
+          - broker: 1
+            advertisedHost: {{ .Values.advertisedHostIpOverride }}
+          - broker: 2
+            advertisedHost: {{ .Values.advertisedHostIpOverride }}
+{{- end }}
     # authorization:  # enable TLS
     #   type: simple  # use Kafka's ACL plugin SimpleAclAuthorizer
     #   superUsers:  # ignore ACLs
@@ -149,10 +158,12 @@ spec:
       log.retention.hours: 168  # 7 days
     storage:
       type: ephemeral
-    # storage:  # enable persistance
-    #   class: Storage-Class-Name  # change
-    #   size: 50Gi
-    #   type: persistent-claim
+{{- if .Values.persistence }}
+    storage:  # enable persistance
+      class: {{ .Values.storageClass }}  # change
+      size: {{ .Values.kafkaStorageSize }}
+      type: persistent-claim
+{{- end }}
     resources:
       limits:
         memory: 8Gi
@@ -193,12 +204,12 @@ spec:
         name: "zookeeper_$2"
       - pattern: "org.apache.ZooKeeperService<name0=StandaloneServer_port(\\d+), name1=(InMemoryDataTree)><>(\\w+)"
         name: "zookeeper_$2_$3"
-    storage:
-      type: ephemeral
-    # storage:  # enable persistance
-    #   class: Storage-Class-Name  # change
-    #   size: 4Gi
-    #   type: persistent-claim
+{{- if .Values.persistence }}
+    storage:  # enable persistance
+      class: {{ .Values.storageClass }}  # change
+      size: {{ .Values.zookeeperStorageSize }}
+      type: persistent-claim
+{{- end }}
     resources:
       limits:
         memory: 1Gi

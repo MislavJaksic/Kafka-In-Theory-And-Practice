@@ -1,3 +1,10 @@
 kafkaClusterName: "kafka-cluster-0"
 
+advertisedHostIpOverride: ""
+
+persistence: false
+storageClass: "default"
+kafkaStorageSize: 50Gi
+zookeeperStorageSize: 4Gi
+
 monitoringNamespace: "monitoring"

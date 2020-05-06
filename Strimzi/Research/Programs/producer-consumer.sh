@@ -1,12 +1,14 @@
 #!/bin/bash
 
 KAFKA_PATH=/path/to/kafka_X  # change
+KAFKA_HOST_PORT=Kubectl-Server-Ip:31000  # change
+KAFKA_TOPIC=Topic-Name  # change
 
-KAFKA_HOST=Kubectl-Server-Ip  # change
-KAFKA_PORT=31000
-SOURCE_TOPIC=Topic-Name  # change
-SINK_TOPIC=Topic-Name  # change
+echo "Enter a few messages after you see '>'."
 
-gnome-terminal -e "bash -c '$KAFKA_PATH/bin/kafka-console-producer.sh --broker-list $KAFKA_HOST:$KAFKA_PORT --topic $SOURCE_TOPIC'"
+$KAFKA_PATH/bin/kafka-console-producer.sh --broker-list $KAFKA_HOST_PORT --topic $KAFKA_TOPIC
 
-gnome-terminal -e "bash -c '$KAFKA_PATH/bin/kafka-console-consumer.sh --bootstrap-server $KAFKA_HOST:$KAFKA_PORT --topic $SINK_TOPIC'"
+echo ""
+echo "Echoing messages:"
+
+$KAFKA_PATH/bin/kafka-console-consumer.sh --bootstrap-server $KAFKA_HOST_PORT --topic $KAFKA_TOPIC --from-beginning

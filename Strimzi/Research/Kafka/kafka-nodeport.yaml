@@ -31,7 +31,7 @@ spec:
         overrides:
           bootstrap:
             nodePort: 31000
-          # brokers:  # optinal; must equal the number of replicas
+          # brokers:  # optional; must equal the number of replicas
           # - broker: 0
           #   advertisedHost: Kubectl-Server-Ip  # change
           # - broker: 1
