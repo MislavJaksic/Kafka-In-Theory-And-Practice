@@ -1,3 +1,4 @@
+{{- if .Values.kamanEnable }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,11 +25,13 @@ spec:
     spec:
       containers:
       - name: kaman
-        image: datafluxgmbh/kaman:0.0.6
+        image: {{ .Values.kamanImage }}
         ports:
         - name: kaman
           containerPort: 8080
           protocol: TCP
+      imagePullSecrets:
+      - name: {{ .Values.kamanPullSecret }}
 ---
 apiVersion: v1
 kind: Service
@@ -54,3 +57,4 @@ spec:
   selector:
     tier: kaman-tier
   type: NodePort
+{{- end }}

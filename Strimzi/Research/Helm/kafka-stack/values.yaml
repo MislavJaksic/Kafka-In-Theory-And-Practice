@@ -7,4 +7,8 @@ storageClass: "default"
 kafkaStorageSize: 50Gi
 zookeeperStorageSize: 4Gi
 
-monitoringNamespace: "monitoring"
+kamanEnable: false
+kamanPullSecret: ""
+kamanImage: ""
+
+monitoringNamespace: ""

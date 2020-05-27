@@ -150,19 +150,20 @@ spec:
           quantile: "0.$4"
     config:
       auto.create.topics.enable: false
-      offsets.topic.replication.factor: 3
-      transaction.state.log.replication.factor: 3
+      offsets.topic.replication.factor: 2
+      transaction.state.log.replication.factor: 2
       transaction.state.log.min.isr: 2
       log.message.format.version: "2.4"
       log.retention.bytes: 100000000  # 100Mi
       log.retention.hours: 168  # 7 days
-    storage:
-      type: ephemeral
 {{- if .Values.persistence }}
     storage:  # enable persistance
       class: {{ .Values.storageClass }}  # change
       size: {{ .Values.kafkaStorageSize }}
       type: persistent-claim
+{{- else }}
+    storage:
+      type: ephemeral
 {{- end }}
     resources:
       limits:
@@ -209,6 +210,9 @@ spec:
       class: {{ .Values.storageClass }}  # change
       size: {{ .Values.zookeeperStorageSize }}
       type: persistent-claim
+{{- else }}
+    storage:
+      type: ephemeral
 {{- end }}
     resources:
       limits:
