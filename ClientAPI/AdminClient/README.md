@@ -1,6 +1,6 @@
 ## AdminClient
 
-Kafka AdminClient manages topics, brokers and security.  
+Kafka `AdminClient` class and  manages topics, brokers and security.  
 
 ### Functionalities
 
@@ -30,13 +30,16 @@ Describe Delegation Token -> security
 ```
 
 ```
-Update Resource Configs -> only topics currently  
+Update Resource Configs -> only topics currently
+Update Log Directory -> for replicas
+Update Partition Reassignment
 ```
 
 ```
 Delete Topics           -> delete topic  
-Delete Records          -> delete records with offset smaller then x  
+Delete Records          -> delete records with offset smaller then x in partition
 Delete Consumer Group   -> delete group  
+Delete Consumer -> by ID
 Delete ALC              -> security  
 Expire Delegation Token -> security  
 ```
@@ -45,5 +48,11 @@ Expire Delegation Token -> security
 List Consumer Group Offset -> get offset list  
 List Consumer Groups       -> get group list  
 List Topics                -> get topic list  
-Metrics                    -> get AdminClient metadata  
+```
+
+```
+Elect Replica Leader -> for partitions
+Get Metrics                    -> get AdminClient metadata
+Increase Partition Number -> for topics
+Renew Delegation Token
 ```
