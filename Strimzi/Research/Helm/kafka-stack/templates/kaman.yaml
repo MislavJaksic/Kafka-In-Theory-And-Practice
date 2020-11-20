@@ -26,12 +26,16 @@ spec:
       containers:
       - name: kaman
         image: {{ .Values.kamanImage }}
+        command: ["java"]
+        args: ["-jar", "./kaman.jar"]
+        imagePullPolicy: Always
         ports:
         - name: kaman
           containerPort: 8080
           protocol: TCP
       imagePullSecrets:
-      - name: {{ .Values.kamanPullSecret }}
+      - name: {{ .Values.kamanPullSecret }} # Secret and Pod must be in the same namespace
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
