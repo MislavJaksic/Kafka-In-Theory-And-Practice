@@ -4,7 +4,7 @@ Kafka Connect moves data between Kafka topics and an external system.
 
 ### Construction
 
-Connect comes in two flavours:
+Connect comes in two flavors:
 * Source Connect which writes messages to Kafka
 * Sink Connect which reads messages from Kafka
 
@@ -14,7 +14,7 @@ Both types of Connect have:
 
 ### Configuration
 
-connect-log4j.properties
+`connect-log4j.properties`
 
 ### Running
 
