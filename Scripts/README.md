@@ -12,7 +12,7 @@ Start Kafka and open a JMX port:
 $: [JMX_PORT=PORT] bin/kafka-server-start.sh config/server.properties
 ```
 
-Start Zookeeper and multiple Kafkas in seperate terminals:
+Start Zookeeper and multiple Kafkas in separate terminals:
 ```
 #!/bin/bash
 
