@@ -1,3 +1,8 @@
+## [Kafka Exporter](https://github.com/danielqsj/kafka_exporter)
+
+
+TODO
+
 ## Prometheus monitoring Kafka
 
 ### Setup
@@ -20,7 +25,7 @@ $: KAFKA_OPTS="$KAFKA_OPTS -javaagent:$PWD/jmx_prometheus_javaagent-x.y.z.jar=_m
 
 Change the "prometheus.yml" like so:  
 ```
-global: # -> 
+global: # ->
   scrape_interval:     15s
   evaluation_interval: 15s
 #   external_labels:
