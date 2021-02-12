@@ -1,0 +1,77 @@
+version: "3"
+services:
+
+  zookeeper:
+    image: Zookeeper-Image  # See https://hub.docker.com/u/datafluxgmbh
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+    ports:
+      - 2181:2181
+    networks:
+      kafka-network:
+        aliases:
+          - zookeeper-network
+
+  kafka0:
+    image: Kafka-Image  # See https://hub.docker.com/u/datafluxgmbh
+    depends_on:
+      - zookeeper
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 2G
+    environment:
+      BROKER_ID: 0  # Increase by 1
+      ADVERTISED_LISTENER_PORT: 9092  # Increase by 1
+      ZOOKEEPER_ALIAS: zookeeper-network
+      ZOOKEEPER_PORT: 2181
+      BROKER_RACK: dc0
+    ports:
+      - 9092:9092  # Increase by 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - kafka-network
+
+  kafka1:
+    image: Kafka-Image
+    depends_on:
+      - zookeeper
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 2G
+    environment:
+      BROKER_ID: 1
+      ADVERTISED_LISTENER_PORT: 9093
+      ZOOKEEPER_ALIAS: zookeeper-network
+      ZOOKEEPER_PORT: 2181
+      BROKER_RACK: dc1
+    ports:
+      - 9093:9093
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - kafka-network
+
+
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    ports:
+      - 18080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:

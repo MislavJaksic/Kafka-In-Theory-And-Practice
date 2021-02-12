@@ -38,6 +38,8 @@ $: kubectl apply -f user.yaml  # see Research
 
 ### Access
 
+[Access Test Scripts](Strimzi/Research/AccessTests)
+
 #### NodePort
 
 ```
