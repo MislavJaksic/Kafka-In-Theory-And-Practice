@@ -1,0 +1,18 @@
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 10m
+    memory: 64Mi
+
+kowl:
+  # See reference config: https://github.com/cloudhut/kowl/blob/master/docs/config/kowl.yaml)
+  config:
+    kafka:
+      brokers:
+        - Kafka-Broker-Ip-Port
+service:
+  type: NodePort
+  port: 30000 # kowl will ignore this value and assign its own NodePort value which you must find manually!
+  annotations: {}
