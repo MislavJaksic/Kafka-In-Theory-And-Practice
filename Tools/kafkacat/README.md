@@ -165,4 +165,8 @@ $: kafkacat -b localhost:9092 -C -t mytopic -o s@1568276612443 -o e@156827661790
  2005  kafkacat -b 172.23.97.86:9092 -t fastcapa-out -p 0 -f 'Topic %t[%p], offset: %o, key: %k, payload: %S bytes: %s\n'
  2006  kafkacat -b 172.23.97.86:9092 -t fastcapa-out -p 0 -f 'Topic %t[%p], offset: %o, k bytes: %s\n'
  2007  history | grep kafkacat
+docker run -it --rm edenhill/kafkacat
+OR
+kafkacat
+ -C -b 172.22.68.100:9092 -t nims-ca-pm-mav -p 0 -o -2 -e -f 'Topic %t[%p], offset: %o, timestamp: %T, key: %k, payload: %S bytes: %s\n'
 ```
